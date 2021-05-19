@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1 class="title-underline">Images to PDF</h1>
+<div class="home-box">
+    <form method="post" enctype="multipart/form-data" action="">
+        {{ form.hidden_tag() }}
+        <fieldset>
+            <div class="form-group pb-3 pt-3">
+                <h3>{{ form.images.label() }}</h3>
+                {{ form.images(class="form-control-file") }}
+            </div>
+            <span>
+                <button class="btn btn-outline-info" name="action" value="preview" type="submit">Preview</button>
+                <button class="btn btn-success" name="action" value="convert" type="submit">Convert</button>
+            </span>
+        </fieldset>
+    </form>
+</div>
+{% endblock %}
