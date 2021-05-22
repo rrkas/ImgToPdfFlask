@@ -62,5 +62,5 @@ def download(filename: str):
         return_data,
         mimetype='application/pdf',
         as_attachment=True,
-        attachment_filename='download_filename.pdf'
+        attachment_filename='RRKA-img2pdf-converted.pdf'
     )
