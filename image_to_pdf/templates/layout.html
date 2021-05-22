@@ -27,14 +27,26 @@
                 </div>
                 <!-- Navbar Right Side -->
                 <div class="navbar-nav">
-<!--                    <a class="nav-item nav-link" href="#">Rohnak Agarwal</a>-->
+                    <a class="nav-item nav-link" href="https://rrka79wal.herokuapp.com/" target="_blank">Rohnak Agarwal</a>
                 </div>
             </div>
         </div>
     </nav>
 </header>
 
-<div class="container">{% block content %}{% endblock %}</div>
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category,message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
 
 <!--Bootstrap imports-->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
