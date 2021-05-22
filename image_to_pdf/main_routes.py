@@ -1,3 +1,4 @@
+import io
 from flask import *
 from .util import *
 
@@ -17,11 +18,9 @@ def home_func():
             flash('No file part')
             return redirect(request.url)
         files = request.files.getlist('files[]')
-        print(len(files), type(files))
         allowed_files = []
         for file in files:
             if file and allowed_file(file.filename):
-                print(file.filename)
                 allowed_files.append(file)
         pdfname = make_pdf_from_pics(allowed_files)
         flash('Images Converted Successfully!', 'success')
@@ -51,7 +50,17 @@ def download(filename: str):
     result_path = os.path.join(current_app.root_path, Config.RESULT_FOLDER, filename + '.pdf')
     if not os.path.exists(result_path):
         abort(404)
-    with open(result_path, 'rb') as f:
-        file = f
+
+    return_data = io.BytesIO()
+    with open(result_path, 'rb') as fo:
+        return_data.write(fo.read())
+    return_data.seek(0)
+
     os.remove(result_path)
-    return send_file(file, as_attachment=True, attachment_filename='RRKAS-img2pdf-convertor.pdf')
+
+    return send_file(
+        return_data,
+        mimetype='application/pdf',
+        as_attachment=True,
+        attachment_filename='download_filename.pdf'
+    )

@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>Oops! Internal Server Error!</h1>
+<p>
+    There was some unexpected error!<br>
+    Click <a href="{{ url_for('main_route.home_func') }}">here</a> to go to home page!<br>
+    Please try after sometime.
+</p>
+{% endblock %}

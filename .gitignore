@@ -1,3 +1,5 @@
 venv/
 */__pycache__
 .idea/
+image_to_pdf/static/pdfs
+image_to_pdf/static/uploads
